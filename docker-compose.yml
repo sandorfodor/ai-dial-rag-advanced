@@ -12,6 +12,8 @@ services:
       - ./init-scripts:/docker-entrypoint-initdb.d
     ports:
       - "5433:5432"
+    networks:
+      - my-pg-network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -20,3 +22,7 @@ services:
 
 volumes:
   postgres_data:
+
+networks:
+  my-pg-network:
+    driver: bridge
